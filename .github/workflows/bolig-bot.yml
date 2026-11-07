@@ -9,6 +9,10 @@ on:
         description: "Seed: gem alle nuværende boliger som set uden at sende besked"
         type: boolean
         default: false
+      test_notify:
+        description: "Test: send én testbesked til din telefon (henter intet, gemmer intet)"
+        type: boolean
+        default: false
       dry_run:
         description: "Dry-run: send intet og gem intet (se resultatet i loggen)"
         type: boolean
@@ -40,12 +44,13 @@ jobs:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: |
           ARGS=""
+          if [ "${{ inputs.test_notify }}" = "true" ]; then ARGS="$ARGS --test-notify"; fi
           if [ "${{ inputs.seed }}" = "true" ]; then ARGS="$ARGS --seed"; fi
           if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
           python -m bolig_bot $ARGS
 
       - name: Commit state
-        if: ${{ inputs.dry_run != true }}
+        if: ${{ inputs.dry_run != true && inputs.test_notify != true }}
         run: |
           git config user.name "bolig-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

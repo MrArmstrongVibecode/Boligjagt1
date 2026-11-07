@@ -73,6 +73,12 @@ den ser en udlejer, så du får aldrig en bunke beskeder om gamle boliger.)
 
 Tjek, at der er kommet et commit "Opdater bolig-state" med filen `data/seen.json`.
 
+### 4. Test at beskeder når frem
+*Actions → bolig-bot → Run workflow* → sæt flueben i **test_notify** → Run.
+Du får en besked med titlen "TEST - Ny bolig: ..." på telefonen. Den henter
+ingen sider og ændrer ikke `seen.json`. Kommer der ingen besked, så tjek at
+secret'en `NTFY_TOPIC` er stavet præcis som kanalen i appen.
+
 ## Lokalt
 
 ```bash
@@ -81,6 +87,7 @@ python -m pytest -q                       # tests (bruger gemte HTML/JSON-snapsh
 python -m bolig_bot --dry-run             # hent og vis alt, uden at sende eller gemme
 python -m bolig_bot --dry-run --no-seed   # vis hvilke boliger der ville give besked lige nu
 python -m bolig_bot --only kereby --dry-run
+python -m bolig_bot --test-notify --dry-run   # vis testbeskeden uden at sende
 NTFY_TOPIC=din-kanal python -m bolig_bot  # rigtig kørsel lokalt
 ```
 

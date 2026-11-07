@@ -75,3 +75,10 @@ def test_unexpected_exception_is_isolated(env):
     data["b"] = [L("b:1"), L("b:2")]
     main.run()
     assert sent == ["Ny bolig: Nørrebro · 12.000 kr."]
+
+
+def test_test_notify_sends_one_message_and_touches_no_state(env):
+    _, sent, tmp = env
+    assert main.main(["--test-notify"]) == 0
+    assert len(sent) == 1 and sent[0].startswith("TEST - Ny bolig: Nørrebro")
+    assert not (tmp / "seen.json").exists()
