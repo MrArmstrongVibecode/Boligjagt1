@@ -2,7 +2,7 @@
 
 Holder øje med nye lejeboliger hos **Kereby** og **City Apartment** og sender en
 push-besked via [ntfy](https://ntfy.sh), når der dukker en ny bolig op, som
-passer til dine kriterier. Kører automatisk hver time i GitHub Actions.
+passer til dine kriterier. Kører automatisk hver 15. minut i GitHub Actions.
 
 ## Sådan virker den
 
@@ -11,7 +11,7 @@ passer til dine kriterier. Kører automatisk hver time i GitHub Actions.
 | Kereby | HTML fra `kereby.dk/bolig/` | Hvert kort har `data-*`-attributter (id, status, postnr, værelser, husleje, m²). |
 | City Apartment | JSON fra `cityapartment.dk/wp-json/wp/v2/cityapartments` | WordPress' åbne REST-API. Hvis den fejler, læses `/all-properties/` som HTML i stedet. Erhverv og parkering sorteres fra via kategorien. |
 
-Hver time sker følgende:
+Hver 15. minut sker følgende:
 
 1. Begge udlejere hentes, hver for sig (én henvendelse pr. side). Fejler den ene, kører den anden videre.
 2. Alle boliger filtreres efter kriterierne i `bolig_bot/config.py`.
@@ -109,12 +109,20 @@ committer `data/seen.json`, når der sker ændringer (`last_seen` opdateres høj
 GitHub om, at workflowet er deaktiveret, eller ser du ingen nye kørsler under
 *Actions*, så klik **Enable workflow** under Actions → bolig-bot.
 
+### Gratis minutter
+Offentlige repoer har ubegrænsede gratis minutter i GitHub Actions. Gør du
+repoet privat, får du 2.000 minutter/md, og hver kørsel tæller som et helt
+minut. Kørsel hver 15. minut (ca. 2.980 min/md) er så for meget. Ret cron i
+`.github/workflows/bolig-bot.yml` til `"7,37 * * * *"` (hver halve time).
+Kanalnavnet er en GitHub Secret og kan ikke ses af andre, heller ikke i et
+offentligt repo.
+
 Bemærk også, at GitHubs cron ikke er præcis. Kørsler kan blive forsinket
 5-30 minutter eller i sjældne tilfælde springes over.
 
 ## Høflighed
-- Højst én henvendelse pr. side pr. time (City Apartment: HTML kun hvis API'et fejler).
-- User-Agent: `bolig-bot (privat brug; hentes højst 1 gang i timen)`.
+- Én henvendelse pr. side pr. kørsel, dvs. 4 i timen (City Apartment: HTML kun hvis API'et fejler).
+- User-Agent: `bolig-bot (privat brug; hentes højst hvert 15. minut)`.
 - robots.txt (tjekket nov. 2026) tillader begge lister. Kereby forbyder kun `/files/*`, City Apartment kun `/wp-admin/`. Der er ikke fundet brugsvilkår, som forbyder automatisk hentning.
 
 ## Struktur

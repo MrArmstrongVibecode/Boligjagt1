@@ -62,6 +62,6 @@ FORGET_AFTER_DAYS = 365
 
 # --- Hentning ---------------------------------------------------------------
 
-USER_AGENT = "bolig-bot (privat brug; hentes højst 1 gang i timen)"
+USER_AGENT = "bolig-bot (privat brug; hentes højst hvert 15. minut)"
 TIMEOUT = 30
 NTFY_SERVER = "https://ntfy.sh"

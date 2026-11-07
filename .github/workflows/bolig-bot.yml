@@ -2,7 +2,10 @@ name: bolig-bot
 
 on:
   schedule:
-    - cron: "7 * * * *"        # hver time, 7 min over (UTC). Undgår myldretiden kl. hel.
+    # Hver 15. minut (:07, :22, :37, :52). Undgår hele og halve timer, hvor GitHub
+    # har mest travlt. Gratis i offentlige repoer; i et privat repo bruger det
+    # ca. 2.980 af de 2.000 gratis minutter/md - sæt så "7,37 * * * *".
+    - cron: "7,22,37,52 * * * *"
   workflow_dispatch:
     inputs:
       seed:
