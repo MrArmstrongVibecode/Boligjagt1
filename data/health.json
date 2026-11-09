@@ -1,9 +1,7 @@
 {
   "cityapartment": {
     "alerted": false,
-    "error": "HTTP 508 fra https://cityapartment.dk/all-properties/",
-    "failures": 1,
-    "since": "2026-11-09T21:45+00:00"
+    "failures": 0
   },
   "kereby": {
     "alerted": false,
