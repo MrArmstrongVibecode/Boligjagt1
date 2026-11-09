@@ -202,7 +202,7 @@
     "last_seen": "2026-11-09",
     "notified": false,
     "rent": 21950,
-    "status": "ledig",
+    "status": "reserveret",
     "title": "Willemoesgade 14, 4. th.",
     "url": "https://cityapartment.dk/cityapartments/willemoesgade-14-4-th/"
   },
@@ -211,7 +211,7 @@
     "last_seen": "2026-11-09",
     "notified": false,
     "rent": 24900,
-    "status": "ledig",
+    "status": "reserveret",
     "title": "Larsbjørnsstræde 9, 1.",
     "url": "https://cityapartment.dk/cityapartments/larsbjornsstraede-9-1/"
   },
