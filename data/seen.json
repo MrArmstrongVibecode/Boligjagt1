@@ -224,6 +224,16 @@
     "title": "Larsbjørnsstræde 9, 3.",
     "url": "https://cityapartment.dk/cityapartments/larsbjornsstraede-9-3/"
   },
+  "cityapartment:39002": {
+    "first_seen": "2026-11-09",
+    "last_seen": "2026-11-09",
+    "notified": false,
+    "rent": 25850,
+    "reserved_notified": false,
+    "status": "ledig",
+    "title": "Østerbrogade 91, 4. tv.",
+    "url": "https://cityapartment.dk/cityapartments/osterbrogade-91-4-tv/"
+  },
   "kereby:27113": {
     "first_seen": "2026-11-07",
     "last_seen": "2026-11-09",
