@@ -439,5 +439,14 @@
     "status": "ledig",
     "title": "Jagtvej 183, 1. tv, 2100 København Ø",
     "url": "https://kereby.dk/bolig/jagtvej-183-1-tv-2100-kobenhavn/"
+  },
+  "kereby:28468": {
+    "first_seen": "2026-11-09",
+    "last_seen": "2026-11-09",
+    "notified": false,
+    "rent": 8874,
+    "status": "reserveret",
+    "title": "Sommerstedgade 12, 1. th, 1718 København V",
+    "url": "https://kereby.dk/bolig/"
   }
 }
