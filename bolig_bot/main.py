@@ -80,7 +80,8 @@ def run(dry_run: bool = False, seed: bool = False, no_seed: bool = False,
         if not events:
             print("  Ingen nye matchende boliger.")
         for ev in events:
-            print(f"  {'NY' if ev.kind == state.NEW else 'LEDIG IGEN'}: {ev.listing.title}")
+            label = {state.NEW: "NY", state.BACK: "LEDIG IGEN", state.NEW_RESERVED: "NY (RESERVERET)"}[ev.kind]
+            print(f"  {label}: {ev.listing.title}")
             if notifier.send(notify.listing_message(ev.listing, ev.kind)):
                 state.mark_sent(seen, ev)
             else:

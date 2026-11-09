@@ -14,7 +14,8 @@ def L(id="k:1", **kw):
 
 
 def run(listings, seen, day, seed=False, notify_back=True):
-    events = state.process(listings, seen, day, seed=seed, notify_back=notify_back)
+    events = state.process(listings, seen, day, seed=seed, notify_back=notify_back,
+                           notify_reserved=False)
     for e in events:
         state.mark_sent(seen, e)
     return events
@@ -129,3 +130,61 @@ def test_health_sources_independent():
     state.update_health(h, "kereby", "x", "t1", threshold=1)
     assert state.update_health(h, "cityapartment", None, "t1", threshold=1) is None
     assert h["kereby"]["alerted"] and not h["cityapartment"]["alerted"]
+
+
+# --- nye boliger der allerede er reserveret ---
+
+def run_r(listings, seen, day, seed=False):
+    events = state.process(listings, seen, day, seed=seed, notify_back=True, notify_reserved=True)
+    for e in events:
+        state.mark_sent(seen, e)
+    return events
+
+
+def test_new_reserved_matching_listing_notifies_once():
+    seen = {}
+    run_r([L("k:0")], seen, D1, seed=True)
+    ev = run_r([L("k:1", status=RESERVED)], seen, D2)
+    assert [e.kind for e in ev] == [state.NEW_RESERVED]
+    assert run_r([L("k:1", status=RESERVED)], seen, D3) == []
+
+
+def test_new_reserved_then_available_gives_normal_new():
+    seen = {}
+    run_r([L("k:0")], seen, D1, seed=True)
+    run_r([L("k:1", status=RESERVED)], seen, D2)
+    assert [e.kind for e in run_r([L("k:1")], seen, D3)] == [state.NEW]
+
+
+def test_reserved_at_seed_gives_no_reserved_message():
+    seen = {}
+    assert run_r([L("k:1", status=RESERVED)], seen, D1, seed=True) == []
+    assert run_r([L("k:1", status=RESERVED)], seen, D2) == []
+
+
+def test_new_reserved_non_matching_is_silent():
+    seen = {}
+    run_r([L("k:0")], seen, D1, seed=True)
+    assert run_r([L("k:1", status=RESERVED, rent=30000)], seen, D2) == []
+
+
+def test_notified_listing_becoming_reserved_gives_no_reserved_message():
+    seen = {}
+    run_r([L("k:0")], seen, D1, seed=True)
+    run_r([L("k:1")], seen, D1)
+    assert run_r([L("k:1", status=RESERVED)], seen, D2) == []
+
+
+def test_new_reserved_failed_send_is_retried():
+    seen = {}
+    run_r([L("k:0")], seen, D1, seed=True)
+    ev = state.process([L("k:1", status=RESERVED)], seen, D2, notify_reserved=True)
+    state.revert(seen, ev[0])
+    ev2 = state.process([L("k:1", status=RESERVED)], seen, D3, notify_reserved=True)
+    assert [e.kind for e in ev2] == [state.NEW_RESERVED]
+
+
+def test_new_reserved_can_be_disabled():
+    seen = {}
+    run_r([L("k:0")], seen, D1, seed=True)
+    assert state.process([L("k:1", status=RESERVED)], seen, D2, notify_reserved=False) == []

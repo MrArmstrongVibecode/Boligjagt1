@@ -22,6 +22,7 @@ Hver 15. minut sker følgende:
 **Regler for beskeder**
 
 - Reserverede og udlejede boliger giver ikke besked. Bliver en af dem ledig senere (og matcher), får du besked.
+- "Ny, men reserveret": En helt ny bolig, der matcher, men allerede er reserveret, når botten ser den første gang, giver én besked (`NOTIFY_NEW_RESERVED`). Bliver den senere ledig, får du en almindelig "Ny bolig"-besked.
 - "Ledig igen": har du fået besked om en bolig, som så bliver reserveret og senere ledig igen, får du én besked mere. Det kan slås fra med `NOTIFY_BACK_AVAILABLE = False`.
 - En bolig, der forsvinder og kommer tilbage med samme id, giver ikke en ny besked.
 - Fejler en udlejer to kørsler i træk (`FAIL_THRESHOLD`), får du **én** fejlbesked. Når den virker igen, får du én "virker igen"-besked.
@@ -78,6 +79,28 @@ Tjek, at der er kommet et commit "Opdater bolig-state" med filen `data/seen.json
 Du får en besked med titlen "TEST - Ny bolig: ..." på telefonen. Den henter
 ingen sider og ændrer ikke `seen.json`. Kommer der ingen besked, så tjek at
 secret'en `NTFY_TOPIC` er stavet præcis som kanalen i appen.
+
+### 5. Præcis timing med cron-job.org (anbefalet)
+GitHubs egne planlagte kørsler bliver ofte forsinket eller droppet (typisk
+1-2 i timen i stedet for 4). [cron-job.org](https://cron-job.org) (gratis)
+starter i stedet workflowet via GitHubs API til tiden.
+
+**a) Token i GitHub** (dit profilbillede → Settings → Developer settings →
+Personal access tokens → **Fine-grained tokens** → Generate new token):
+- Repository access: **Only select repositories** → `Boligjagt1`
+- Permissions → Repository permissions → **Actions: Read and write**
+- Expiration: fx 1 år. Skriv datoen ned, og lav en ny token, når den udløber.
+
+**b) Job i cron-job.org** (Create cronjob):
+- URL: `https://api.github.com/repos/MrArmstrongVibecode/Boligjagt1/actions/workflows/bolig-bot.yml/dispatches`
+- Advanced → Request method: **POST**
+- Headers: `Accept: application/vnd.github+json`, `Authorization: Bearer <token>`,
+  `X-GitHub-Api-Version: 2022-11-28`, `Content-Type: application/json`
+- Request body: `{"ref":"main"}`
+- Time zone: **Europe/Copenhagen**
+- Svaret skal være **204** (= succes uden indhold).
+
+Brug to jobs: et hvert 3. minut kl. 8-12 og et hvert 10. minut resten af døgnet.
 
 ## Lokalt
 

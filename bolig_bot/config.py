@@ -53,6 +53,11 @@ AREAS = {
 # reserveret og derefter ledig igen.
 NOTIFY_BACK_AVAILABLE = True
 
+# Send også besked om helt nye boliger der matcher, men allerede er
+# reserveret/udlejet, når botten ser dem første gang. Bliver boligen senere
+# ledig, får du en almindelig "Ny bolig"-besked.
+NOTIFY_NEW_RESERVED = True
+
 # Antal fejlede kørsler i træk før der sendes fejlbesked (1 = med det samme).
 # 2 betyder at et enkelt netværksblip ikke giver støj.
 FAIL_THRESHOLD = 2

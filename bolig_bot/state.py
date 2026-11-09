@@ -15,6 +15,7 @@ from .models import AVAILABLE, Listing
 
 NEW = "new"      # ny bolig der matcher
 BACK = "back"    # bolig du har fået besked om, som er ledig igen
+NEW_RESERVED = "new_reserved"  # helt ny bolig der matcher, men allerede er reserveret/udlejet
 
 
 @dataclass
@@ -47,7 +48,7 @@ def source_has_history(seen: dict, source: str) -> bool:
 
 
 def process(listings: list[Listing], seen: dict, today: date, seed: bool = False,
-            notify_back: bool = None) -> list[Event]:
+            notify_back: bool = None, notify_reserved: bool = None) -> list[Event]:
     """Sammenligner hentede boliger med seen, opdaterer seen og returnerer events.
 
     seen[id]["notified"] sættes IKKE her for nye events - det gør mark_sent()
@@ -55,6 +56,8 @@ def process(listings: list[Listing], seen: dict, today: date, seed: bool = False
     """
     if notify_back is None:
         notify_back = config.NOTIFY_BACK_AVAILABLE
+    if notify_reserved is None:
+        notify_reserved = config.NOTIFY_NEW_RESERVED
     events = []
     iso = today.isoformat()
     for lst in listings:
@@ -62,6 +65,9 @@ def process(listings: list[Listing], seen: dict, today: date, seed: bool = False
         good = matches(lst) and is_available(lst)
         if entry is None:
             entry = seen[lst.id] = {"first_seen": iso, "notified": False}
+            if not seed:
+                # Kun helt nye boliger kan give "allerede reserveret"-besked.
+                entry["reserved_notified"] = False
             prev_status = None
         else:
             prev_status = entry.get("status")
@@ -75,13 +81,20 @@ def process(listings: list[Listing], seen: dict, today: date, seed: bool = False
         elif (good and notify_back and entry.get("notified")
               and prev_status is not None and prev_status != AVAILABLE):
             events.append(Event(BACK, lst, prev_status))
+        elif (notify_reserved and not is_available(lst) and matches(lst)
+              and entry.get("reserved_notified") is False and not entry.get("notified")):
+            events.append(Event(NEW_RESERVED, lst, prev_status))
 
         entry.update(title=lst.title, url=lst.url, status=lst.status, rent=lst.rent, last_seen=iso)
     return events
 
 
 def mark_sent(seen: dict, event: Event) -> None:
-    seen[event.listing.id]["notified"] = True
+    if event.kind == NEW_RESERVED:
+        # "notified" forbliver False, så du stadig får besked hvis den bliver ledig.
+        seen[event.listing.id]["reserved_notified"] = True
+    else:
+        seen[event.listing.id]["notified"] = True
 
 
 def revert(seen: dict, event: Event) -> None:
@@ -89,6 +102,8 @@ def revert(seen: dict, event: Event) -> None:
     entry = seen[event.listing.id]
     if event.kind == BACK:
         entry["status"] = event.prev_status
+    elif event.kind == NEW_RESERVED:
+        entry["reserved_notified"] = False
     else:
         entry["notified"] = False
 

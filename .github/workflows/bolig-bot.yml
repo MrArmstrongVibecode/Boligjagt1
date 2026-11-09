@@ -2,6 +2,9 @@ name: bolig-bot
 
 on:
   schedule:
+    # Reserve. Den egentlige timing styres af cron-job.org, som starter
+    # workflowet via workflow_dispatch (se README). GitHub dropper ofte
+    # planlagte kørsler, så de kan ikke stå alene.
     # Hver 15. minut (:07, :22, :37, :52). Undgår hele og halve timer, hvor GitHub
     # har mest travlt. Gratis i offentlige repoer; i et privat repo bruger det
     # ca. 2.980 af de 2.000 gratis minutter/md - sæt så "7,37 * * * *".
