@@ -458,5 +458,15 @@
     "status": "reserveret",
     "title": "Sommerstedgade 12, 1. th, 1718 København V",
     "url": "https://kereby.dk/bolig/"
+  },
+  "kereby:28489": {
+    "first_seen": "2026-11-10",
+    "last_seen": "2026-11-10",
+    "notified": false,
+    "rent": 12553,
+    "reserved_notified": true,
+    "status": "reserveret",
+    "title": "Oehlenschlægersgade 46, 2. tv, 1663 København V",
+    "url": "https://kereby.dk/bolig/"
   }
 }
