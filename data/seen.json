@@ -234,6 +234,16 @@
     "title": "Østerbrogade 91, 4. tv.",
     "url": "https://cityapartment.dk/cityapartments/osterbrogade-91-4-tv/"
   },
+  "cityapartment:39041": {
+    "first_seen": "2026-11-10",
+    "last_seen": "2026-11-10",
+    "notified": false,
+    "rent": 21450,
+    "reserved_notified": false,
+    "status": "ledig",
+    "title": "Østerbrogade 39, 2. tv.",
+    "url": "https://cityapartment.dk/cityapartments/osterbrogade-39-2-tv/"
+  },
   "kereby:27113": {
     "first_seen": "2026-11-07",
     "last_seen": "2026-11-10",
