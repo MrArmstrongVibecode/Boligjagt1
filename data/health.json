@@ -1,10 +1,14 @@
 {
   "cityapartment": {
     "alerted": false,
-    "failures": 0
+    "error": "HTTP 454 fra https://cityapartment.dk/all-properties/",
+    "failures": 1,
+    "since": "2026-11-10T09:09+00:00"
   },
   "kereby": {
     "alerted": false,
-    "failures": 0
+    "error": "HTTP 406 fra https://kereby.dk/bolig/",
+    "failures": 1,
+    "since": "2026-11-10T09:09+00:00"
   }
 }
