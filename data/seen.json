@@ -478,5 +478,15 @@
     "status": "reserveret",
     "title": "Oehlenschlægersgade 46, 2. tv, 1663 København V",
     "url": "https://kereby.dk/bolig/"
+  },
+  "kereby:28528": {
+    "first_seen": "2026-11-11",
+    "last_seen": "2026-11-11",
+    "notified": false,
+    "rent": 14803,
+    "reserved_notified": true,
+    "status": "reserveret",
+    "title": "Englandsvej 2, 3. tv, 2300 København S",
+    "url": "https://kereby.dk/bolig/"
   }
 }
