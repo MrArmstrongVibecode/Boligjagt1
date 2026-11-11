@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import re
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass
 
 # Fælles statusværdier
 AVAILABLE = "ledig"
@@ -28,7 +28,6 @@ class Listing:
     status: str = AVAILABLE
     kind: str = HOME
     available_from: str | None = None
-    labels: list[str] = field(default_factory=list)   # fx ["Delevenlig", "Altan"]
 
     def to_dict(self) -> dict:
         return asdict(self)

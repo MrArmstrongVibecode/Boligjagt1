@@ -1,8 +1,4 @@
-"""Kriterier. Ret her - resten af programmet læser kun fra denne fil.
-
-Øverst står DINE kriterier (kanalen "dig"). Nederst under KANALER står
-gruppens kriterier. Boligerne hentes kun én gang pr. kørsel, uanset hvor
-mange kanaler der er."""
+"""Dine kriterier. Ret her - resten af programmet læser kun fra denne fil."""
 
 # --- Filter -----------------------------------------------------------------
 
@@ -74,46 +70,3 @@ FORGET_AFTER_DAYS = 365
 USER_AGENT = "bolig-bot (privat brug; hentes højst hvert 15. minut)"
 TIMEOUT = 30
 NTFY_SERVER = "https://ntfy.sh"
-
-# --- KANALER ----------------------------------------------------------------
-# Hver kanal har sit eget ntfy-kanalnavn (GitHub Secret), sine egne kriterier
-# og sin egen huskeliste i data/. Den første kanal får også fejlbeskeder.
-# En kanal uden secret springes bare over (undtagen den første).
-#
-# "rent_per_person": max husleje pr. person, hvor personer = værelser - 1
-# (én fælles stue). 4 vær. = 3 pers. = 21.600 kr., 5 vær. = 28.800 kr. osv.
-# "highlight": mærkater der fremhæves i beskeden (kun Kereby har dem).
-
-GROUP_AREAS = {
-    **AREAS,
-    "Sydhavn": {
-        "postnumre": [2450],                                 # København SV
-        "navne": ["sydhavn", "københavn sv", "kbh sv"],
-    },
-}
-
-CHANNELS = [
-    {
-        "name": "dig",
-        "topic_env": "NTFY_TOPIC",
-        "seen_file": "seen.json",
-        "min_rooms": MIN_ROOMS,
-        "max_rent": MAX_RENT,
-        "min_size": MIN_SIZE,
-        "areas": AREAS,
-        "notify_back": NOTIFY_BACK_AVAILABLE,
-        "notify_new_reserved": NOTIFY_NEW_RESERVED,
-    },
-    {
-        "name": "gruppe",
-        "topic_env": "NTFY_TOPIC_GRUPPE",
-        "seen_file": "seen_gruppe.json",
-        "min_rooms": 4,
-        "rent_per_person": 7_200,
-        "min_size": None,
-        "areas": GROUP_AREAS,
-        "notify_back": True,
-        "notify_new_reserved": True,
-        "highlight": ["Delevenlig"],
-    },
-]

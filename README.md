@@ -28,27 +28,6 @@ Hver 15. minut sker følgende:
 - Fejler en udlejer to kørsler i træk (`FAIL_THRESHOLD`), får du **én** fejlbesked. Når den virker igen, får du én "virker igen"-besked.
 - Hvis en side pludselig returnerer 0 boliger, behandles det som en fejl og ikke som "alt er væk". Der slettes intet.
 
-## Kanaler: dig og gruppen
-
-Botten henter siderne én gang og sender til flere ntfy-kanaler med hver
-sine kriterier (se `CHANNELS` nederst i `bolig_bot/config.py`):
-
-| Kanal | Secret | Kriterier | Huskeliste |
-|---|---|---|---|
-| dig | `NTFY_TOPIC` | 2+ vær., max 16.000 kr., 8 områder | `data/seen.json` |
-| gruppe | `NTFY_TOPIC_GRUPPE` | 4+ vær., max 7.200 kr. pr. person (personer = værelser − 1), 8 områder + Sydhavn | `data/seen_gruppe.json` |
-
-- Gruppens beskeder viser husleje pr. person, og "✅ Delevenlig", hvis Kereby har markeret boligen sådan.
-- Fejlbeskeder ("X virker ikke") går kun til din kanal.
-- Er `NTFY_TOPIC_GRUPPE` ikke sat, springes gruppen bare over. Første gang den er sat, seedes gruppens huskeliste uden beskeder.
-- En bolig, der passer til begge kanaler, giver besked i begge.
-
-**Tilføj gruppen:** Find på et nyt, tilfældigt kanalnavn, og opret det som
-secret `NTFY_TOPIC_GRUPPE`. Alle i gruppen abonnerer på navnet i ntfy-appen
-(+ → kanalnavn → server `ntfy.sh`). Send navnet privat. Alle med navnet kan
-læse og sende til kanalen, og ingen kan smides ud. Vil I det, skal der laves
-et nyt navn.
-
 ## Kriterier
 
 Ret i `bolig_bot/config.py`:
@@ -97,7 +76,7 @@ Tjek, at der er kommet et commit "Opdater bolig-state" med filen `data/seen.json
 
 ### 4. Test at beskeder når frem
 *Actions → bolig-bot → Run workflow* → sæt flueben i **test_notify** → Run.
-Hver kanal får en besked med titlen "TEST (kanal) - Ny bolig: ...". Den henter
+Du får en besked med titlen "TEST - Ny bolig: ..." på telefonen. Den henter
 ingen sider og ændrer ikke `seen.json`. Kommer der ingen besked, så tjek at
 secret'en `NTFY_TOPIC` er stavet præcis som kanalen i appen.
 

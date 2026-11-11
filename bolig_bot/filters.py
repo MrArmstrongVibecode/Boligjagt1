@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from . import config
-from .channels import Channel, personal
 from .models import AVAILABLE, HOME, Listing, postcode_from_text
 
 
@@ -39,26 +38,24 @@ def area_for(listing: Listing, areas: dict = None) -> str | None:
     return None
 
 
-def reject_reason(listing: Listing, ch: Channel | None = None) -> str | None:
-    """None = boligen matcher kanalens kriterier (standard: dine). Ellers en kort forklaring."""
-    ch = ch or personal()
+def reject_reason(listing: Listing) -> str | None:
+    """None = boligen matcher dine kriterier. Ellers en kort forklaring."""
     if listing.kind != HOME:
         return f"type: {listing.kind}"
-    if area_for(listing, ch.areas) is None:
+    if area_for(listing) is None:
         return f"område: {listing.postcode or listing.district or '?'}"
-    if listing.rooms is None or listing.rooms < ch.min_rooms:
+    if listing.rooms is None or listing.rooms < config.MIN_ROOMS:
         return f"værelser: {listing.rooms}"
-    limit = ch.rent_limit(listing.rooms)
-    if listing.rent is None or (limit is not None and listing.rent > limit):
-        return f"husleje: {listing.rent}" + (f" > {limit}" if limit and ch.rent_per_person else "")
-    if ch.min_size and (listing.size or 0) < ch.min_size:
+    if listing.rent is None or listing.rent > config.MAX_RENT:
+        return f"husleje: {listing.rent}"
+    if config.MIN_SIZE and (listing.size or 0) < config.MIN_SIZE:
         return f"størrelse: {listing.size}"
     return None
 
 
-def matches(listing: Listing, ch: Channel | None = None) -> bool:
+def matches(listing: Listing) -> bool:
     """Opfylder kriterierne (uanset status)."""
-    return reject_reason(listing, ch) is None
+    return reject_reason(listing) is None
 
 
 def is_available(listing: Listing) -> bool:

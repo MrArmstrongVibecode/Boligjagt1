@@ -35,18 +35,6 @@ def _text(card, cls: str) -> str:
     return " ".join(el.get_text(" ").split()) if el else ""
 
 
-def _labels(card) -> list[str]:
-    """Mærkater som "Delevenlig", "Altan" fra kortet og data-req="Delevenlig|Elevator"."""
-    found = [" ".join(el.get_text(" ").split()) for el in card.select(".jorato-case-card__label")]
-    found += (card.get("data-req") or "").split("|")
-    out = []
-    for lab in found:
-        lab = lab.strip()
-        if lab and lab not in out:
-            out.append(lab)
-    return out
-
-
 def parse(html: str) -> list[Listing]:
     soup = BeautifulSoup(html, "lxml")
     cards = soup.select("article[data-jorato-card]")
@@ -77,7 +65,6 @@ def parse(html: str) -> list[Listing]:
             rent=to_int(card.get("data-rent")) or to_int(_text(card, "rent")),
             status=STATE_MAP.get(state, state or "ukendt"),
             kind=_kind(card.get("data-subclass") or "", headline),
-            labels=_labels(card),
         ))
     return listings
 

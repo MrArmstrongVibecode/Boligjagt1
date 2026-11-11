@@ -16,20 +16,14 @@ def _kr(n) -> str:
     return f"{n:,}".replace(",", ".") + " kr." if n is not None else "? kr."
 
 
-def listing_message(listing: Listing, kind: str, ch=None) -> dict:
-    area = area_for(listing, ch.areas if ch else None) or listing.district or ""
+def listing_message(listing: Listing, kind: str) -> dict:
+    area = area_for(listing) or listing.district or ""
     head = {BACK: "Ledig igen", NEW_RESERVED: f"Ny, men {listing.status}"}.get(kind, "Ny bolig")
     lines = [
         f"{listing.title}" + (f" ({area})" if area else ""),
         f"{_kr(listing.rent)}/md · {listing.rooms or '?'} vær. · {listing.size or '?'} m²",
         f"Udlejer: {listing.landlord}",
     ]
-    if ch is not None and ch.rent_per_person and listing.rent and listing.rooms:
-        n = ch.persons(listing.rooms)
-        lines.insert(2, f"≈ {_kr(round(listing.rent / n))}/person ved {n} personer")
-    hits = [lab for lab in (ch.highlight if ch else []) if lab in listing.labels]
-    if hits:
-        lines.insert(1, "✅ " + ", ".join(hits))
     if kind == NEW_RESERVED:
         lines.append(f"Status: {listing.status} allerede. Du får besked, hvis den bliver ledig.")
     if listing.available_from:
@@ -64,16 +58,15 @@ def recovered_message(source: str) -> dict:
 
 
 class Notifier:
-    def __init__(self, dry_run: bool, topic_env: str = "NTFY_TOPIC", label: str = ""):
+    def __init__(self, dry_run: bool):
         self.dry_run = dry_run
-        self.label = label
-        self.topic = os.environ.get(topic_env, "").strip()
+        self.topic = os.environ.get("NTFY_TOPIC", "").strip()
         if not dry_run and not self.topic:
-            raise SystemExit(f"{topic_env} mangler (sæt den som GitHub Secret / miljøvariabel).")
+            raise SystemExit("NTFY_TOPIC mangler (sæt den som GitHub Secret / miljøvariabel).")
 
     def send(self, msg: dict) -> bool:
         if self.dry_run:
-            print(f"  [dry-run] ville sende{' til ' + self.label if self.label else ''}:")
+            print("  [dry-run] ville sende:")
             print("    Titel: " + msg["title"])
             for line in msg["message"].splitlines():
                 print("    " + line)

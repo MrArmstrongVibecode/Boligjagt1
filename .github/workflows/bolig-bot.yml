@@ -16,7 +16,7 @@ on:
         type: boolean
         default: false
       test_notify:
-        description: "Test: send én testbesked til hver kanal (henter intet, gemmer intet)"
+        description: "Test: send én testbesked til din telefon (henter intet, gemmer intet)"
         type: boolean
         default: false
       dry_run:
@@ -48,7 +48,6 @@ jobs:
       - name: Kør bolig-bot
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-          NTFY_TOPIC_GRUPPE: ${{ secrets.NTFY_TOPIC_GRUPPE }}   # valgfri: gruppens kanal
         run: |
           ARGS=""
           if [ "${{ inputs.test_notify }}" = "true" ]; then ARGS="$ARGS --test-notify"; fi
