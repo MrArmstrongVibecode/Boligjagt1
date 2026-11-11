@@ -5,6 +5,8 @@
   },
   "kereby": {
     "alerted": false,
-    "failures": 0
+    "error": "Netværksfejl mod https://kereby.dk/bolig/: ReadTimeout",
+    "failures": 1,
+    "since": "2026-11-11T06:33+00:00"
   }
 }
