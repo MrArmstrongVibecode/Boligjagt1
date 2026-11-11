@@ -125,6 +125,16 @@
     "title": "Turesensgade 33, kl. th.",
     "url": "https://cityapartment.dk/cityapartments/turesensgade-33-kld-th-2/"
   },
+  "cityapartment:37200": {
+    "first_seen": "2026-11-11",
+    "last_seen": "2026-11-11",
+    "notified": false,
+    "rent": 16250,
+    "reserved_notified": false,
+    "status": "ledig",
+    "title": "Bronzehøjen 14",
+    "url": "https://cityapartment.dk/cityapartments/bronzehojen-30/"
+  },
   "cityapartment:37381": {
     "first_seen": "2026-11-07",
     "last_seen": "2026-11-11",
