@@ -48,7 +48,7 @@ def source_has_history(seen: dict, source: str) -> bool:
 
 
 def process(listings: list[Listing], seen: dict, today: date, seed: bool = False,
-            notify_back: bool = None, notify_reserved: bool = None) -> list[Event]:
+            notify_back: bool = None, notify_reserved: bool = None, channel=None) -> list[Event]:
     """Sammenligner hentede boliger med seen, opdaterer seen og returnerer events.
 
     seen[id]["notified"] sættes IKKE her for nye events - det gør mark_sent()
@@ -62,7 +62,8 @@ def process(listings: list[Listing], seen: dict, today: date, seed: bool = False
     iso = today.isoformat()
     for lst in listings:
         entry = seen.get(lst.id)
-        good = matches(lst) and is_available(lst)
+        ok = matches(lst, channel)
+        good = ok and is_available(lst)
         if entry is None:
             entry = seen[lst.id] = {"first_seen": iso, "notified": False}
             if not seed:
@@ -81,7 +82,7 @@ def process(listings: list[Listing], seen: dict, today: date, seed: bool = False
         elif (good and notify_back and entry.get("notified")
               and prev_status is not None and prev_status != AVAILABLE):
             events.append(Event(BACK, lst, prev_status))
-        elif (notify_reserved and not is_available(lst) and matches(lst)
+        elif (notify_reserved and not is_available(lst) and ok
               and entry.get("reserved_notified") is False and not entry.get("notified")):
             events.append(Event(NEW_RESERVED, lst, prev_status))
 
