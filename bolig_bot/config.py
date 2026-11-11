@@ -81,7 +81,7 @@ NTFY_SERVER = "https://ntfy.sh"
 # En kanal uden secret springes bare over (undtagen den første).
 #
 # "rent_per_person": max husleje pr. person, hvor personer = værelser - 1
-# (én fælles stue). 4 vær. = 3 pers. = 21.000 kr., 5 vær. = 28.000 kr. osv.
+# (én fælles stue). 4 vær. = 3 pers. = 21.600 kr., 5 vær. = 28.800 kr. osv.
 # "highlight": mærkater der fremhæves i beskeden (kun Kereby har dem).
 
 GROUP_AREAS = {
@@ -109,7 +109,7 @@ CHANNELS = [
         "topic_env": "NTFY_TOPIC_GRUPPE",
         "seen_file": "seen_gruppe.json",
         "min_rooms": 4,
-        "rent_per_person": 7_000,
+        "rent_per_person": 7_200,
         "min_size": None,
         "areas": GROUP_AREAS,
         "notify_back": True,

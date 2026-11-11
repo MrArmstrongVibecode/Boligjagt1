@@ -36,7 +36,7 @@ sine kriterier (se `CHANNELS` nederst i `bolig_bot/config.py`):
 | Kanal | Secret | Kriterier | Huskeliste |
 |---|---|---|---|
 | dig | `NTFY_TOPIC` | 2+ vær., max 16.000 kr., 8 områder | `data/seen.json` |
-| gruppe | `NTFY_TOPIC_GRUPPE` | 4+ vær., max 7.000 kr. pr. person (personer = værelser − 1), 8 områder + Sydhavn | `data/seen_gruppe.json` |
+| gruppe | `NTFY_TOPIC_GRUPPE` | 4+ vær., max 7.200 kr. pr. person (personer = værelser − 1), 8 områder + Sydhavn | `data/seen_gruppe.json` |
 
 - Gruppens beskeder viser husleje pr. person, og "✅ Delevenlig", hvis Kereby har markeret boligen sådan.
 - Fejlbeskeder ("X virker ikke") går kun til din kanal.

@@ -1,4 +1,4 @@
-"""Gruppekanalens kriterier: 4+ værelser, 7.000 kr. pr. person (værelser - 1), dine områder + Sydhavn."""
+"""Gruppekanalens kriterier: 4+ værelser, 7.200 kr. pr. person (værelser - 1), dine områder + Sydhavn."""
 from pathlib import Path
 
 import pytest
@@ -22,9 +22,9 @@ def L(**kw):
 
 @pytest.mark.parametrize("rooms,rent,ok", [
     (3, 10000, False),            # for få værelser til gruppen
-    (4, 21000, True), (4, 21001, False),
-    (5, 28000, True), (5, 28001, False),
-    (6, 35000, True),
+    (4, 21600, True), (4, 21601, False),
+    (5, 28800, True), (5, 28801, False),
+    (6, 36000, True),
 ])
 def test_group_rent_per_person(rooms, rent, ok):
     assert matches(L(rooms=rooms, rent=rent), GROUP) is ok
@@ -43,7 +43,7 @@ def test_your_channel_unchanged():
 
 
 def test_group_reject_reason_explains_limit():
-    assert reject_reason(L(rooms=4, rent=22000), GROUP) == "husleje: 22000 > 21000"
+    assert reject_reason(L(rooms=4, rent=22000), GROUP) == "husleje: 22000 > 21600"
 
 
 def test_kereby_labels_parsed():
