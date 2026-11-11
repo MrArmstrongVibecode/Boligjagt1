@@ -244,6 +244,16 @@
     "title": "Østerbrogade 39, 2. tv.",
     "url": "https://cityapartment.dk/cityapartments/osterbrogade-39-2-tv/"
   },
+  "cityapartment:39070": {
+    "first_seen": "2026-11-11",
+    "last_seen": "2026-11-11",
+    "notified": false,
+    "rent": 20000,
+    "reserved_notified": false,
+    "status": "ledig",
+    "title": "Valby Langgade 21B, St. Th.",
+    "url": "https://cityapartment.dk/cityapartments/valby-langgagde-21b-st-th/"
+  },
   "kereby:27113": {
     "first_seen": "2026-11-07",
     "last_seen": "2026-11-11",
