@@ -1,7 +1,9 @@
 {
   "cityapartment": {
     "alerted": false,
-    "failures": 0
+    "error": "Netværksfejl mod https://cityapartment.dk/all-properties/: ConnectionError",
+    "failures": 1,
+    "since": "2026-11-11T04:00+00:00"
   },
   "kereby": {
     "alerted": false,
