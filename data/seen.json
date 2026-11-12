@@ -508,5 +508,15 @@
     "status": "reserveret",
     "title": "Englandsvej 2, 3. tv, 2300 København S",
     "url": "https://kereby.dk/bolig/"
+  },
+  "kereby:28540": {
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "notified": false,
+    "rent": 28685,
+    "reserved_notified": false,
+    "status": "ledig",
+    "title": "Herluf Trolles Gade 3, 3. tv, 1052 København K",
+    "url": "https://kereby.dk/bolig/herluf-trolles-gade-3-3-tv-1052-kobenhavn-k/"
   }
 }
