@@ -269,9 +269,9 @@
     "last_seen": "2026-11-12",
     "notified": false,
     "rent": 24990,
-    "status": "ledig",
+    "status": "reserveret",
     "title": "Strandboulevarden 61, 5. th, 2100 København Ø",
-    "url": "https://kereby.dk/bolig/strandboulevarden-61-5-th-2100-kobenhavn/"
+    "url": "https://kereby.dk/bolig/"
   },
   "kereby:27602": {
     "first_seen": "2026-11-07",
