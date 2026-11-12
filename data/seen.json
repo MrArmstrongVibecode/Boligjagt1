@@ -264,6 +264,16 @@
     "title": "Valby Langgade 21B, St. Th.",
     "url": "https://cityapartment.dk/cityapartments/valby-langgagde-21b-st-th/"
   },
+  "cityapartment:39117": {
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "notified": false,
+    "rent": 44500,
+    "reserved_notified": false,
+    "status": "ledig",
+    "title": "Stockholmsgade 49, St.",
+    "url": "https://cityapartment.dk/cityapartments/stockholmsgade-49-st/"
+  },
   "kereby:27113": {
     "first_seen": "2026-11-07",
     "last_seen": "2026-11-12",
