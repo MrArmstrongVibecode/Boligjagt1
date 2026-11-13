@@ -528,5 +528,15 @@
     "status": "ledig",
     "title": "Herluf Trolles Gade 3, 3. tv, 1052 København K",
     "url": "https://kereby.dk/bolig/herluf-trolles-gade-3-3-tv-1052-kobenhavn-k/"
+  },
+  "kereby:28549": {
+    "first_seen": "2026-11-13",
+    "last_seen": "2026-11-13",
+    "notified": true,
+    "rent": 13933,
+    "reserved_notified": false,
+    "status": "ledig",
+    "title": "Nygårdsvej 16, 1. th, 2100 København Ø",
+    "url": "https://kereby.dk/bolig/nygardsvej-16-1-th-2100-kobenhavn/"
   }
 }
