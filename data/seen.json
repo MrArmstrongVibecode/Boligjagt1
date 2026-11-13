@@ -451,9 +451,9 @@
     "last_seen": "2026-11-13",
     "notified": false,
     "rent": 25777,
-    "status": "ledig",
+    "status": "reserveret",
     "title": "Kronprinsensgade 10, 3., 1114 København K",
-    "url": "https://kereby.dk/bolig/kronprinsensgade-10-3-1114-kobenhavn-k/"
+    "url": "https://kereby.dk/bolig/"
   },
   "kereby:28403": {
     "first_seen": "2026-11-07",
