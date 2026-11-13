@@ -264,6 +264,16 @@
     "title": "Valby Langgade 21B, St. Th.",
     "url": "https://cityapartment.dk/cityapartments/valby-langgagde-21b-st-th/"
   },
+  "cityapartment:39108": {
+    "first_seen": "2026-11-13",
+    "last_seen": "2026-11-13",
+    "notified": false,
+    "rent": 20950,
+    "reserved_notified": false,
+    "status": "ledig",
+    "title": "Smallegade 8, 4. Th.",
+    "url": "https://cityapartment.dk/cityapartments/smallegade-8-4-th/"
+  },
   "cityapartment:39117": {
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-13",
