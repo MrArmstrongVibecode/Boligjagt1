@@ -423,9 +423,9 @@
     "last_seen": "2026-11-13",
     "notified": false,
     "rent": 22050,
-    "status": "ledig",
+    "status": "reserveret",
     "title": "Drogdensgade 4, 5., 2300 København S",
-    "url": "https://kereby.dk/bolig/drogdensgade-4-5-2300-kobenhavn-s/"
+    "url": "https://kereby.dk/bolig/"
   },
   "kereby:28382": {
     "first_seen": "2026-11-07",
