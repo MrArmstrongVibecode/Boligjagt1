@@ -283,6 +283,16 @@
     "title": "Falkonervænget 5, st. tv.",
     "url": "https://cityapartment.dk/cityapartments/falkonervaenget-5-st-tv/"
   },
+  "cityapartment:39303": {
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "notified": false,
+    "rent": 15100,
+    "reserved_notified": false,
+    "status": "ledig",
+    "title": "Fuglevangsvej 10, 2. Lej. 24",
+    "url": "https://cityapartment.dk/cityapartments/fuglevangsvej-10-2-lej-24/"
+  },
   "kereby:27113": {
     "first_seen": "2026-11-15",
     "last_seen": "2026-11-24",
