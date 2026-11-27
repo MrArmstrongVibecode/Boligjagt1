@@ -293,6 +293,16 @@
     "title": "Fuglevangsvej 10, 2. Lej. 24",
     "url": "https://cityapartment.dk/cityapartments/fuglevangsvej-10-2-lej-24/"
   },
+  "cityapartment:39316": {
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "notified": true,
+    "rent": 14950,
+    "reserved_notified": false,
+    "status": "ledig",
+    "title": "Ryesgade 57, 4. sal",
+    "url": "https://cityapartment.dk/cityapartments/ryesgade-57-4-sal/"
+  },
   "kereby:27113": {
     "first_seen": "2026-11-15",
     "last_seen": "2026-11-24",
